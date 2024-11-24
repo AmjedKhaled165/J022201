@@ -1,8 +1,3 @@
-    <?php
-        echo "Hello world!";
-    ?>
-    
-
 # Oryx J022201
 ### Oryx the Stok M8 aims to automate inventory management in retail stores by utilizing computer vision and deep learning techniques to detect empty spaces on store shelves. Traditional manual methods for monitoring shelf stock can be time-consuming and error-prone. By applying YOLOv10, an advanced object detection algorithm, we can revolutionize this process, providing real-time and accurate identification of vacant shelf spaces.
 
@@ -48,6 +43,8 @@
 
 # How Run Oryx_01_model.pt
 ### Frist Downloads Libraries
-...
-pip install -r requirements.txt
-...
+    
+    pip install -r requirements.txt
+    
+
+
