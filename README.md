@@ -41,4 +41,6 @@
 ![image](https://github.com/user-attachments/assets/9500cd7a-ca9b-4194-a02d-21153e8ec537)
 ![image](https://github.com/user-attachments/assets/03646dcc-61b3-4f82-81c9-f8cdfaf041b9)
 
-
+# How Run Oryx_01_model.pt
+### Frist Downloads Libraries
+:LK:
