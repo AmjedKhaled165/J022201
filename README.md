@@ -12,4 +12,5 @@
 
 ### link: https://drive.google.com/file/d/1NmtMoH3OipUKnSgL8k9nrQPSteMmSXNG/view?usp=drive_link
 # Model performance
-### metrics ![image](https://github.com/user-attachments/assets/63d1f544-a170-4dcb-8e6f-817694531eae)
+### Metrics:
+![image](https://github.com/user-attachments/assets/63d1f544-a170-4dcb-8e6f-817694531eae)
