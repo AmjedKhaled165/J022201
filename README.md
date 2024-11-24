@@ -43,4 +43,6 @@
 
 # How Run Oryx_01_model.pt
 ### Frist Downloads Libraries
-:LK:
+...
+pip install -r requirements.txt
+...
