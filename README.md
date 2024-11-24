@@ -47,9 +47,11 @@
     pip install -r requirements.txt
 
 ### Second open app.py and run code
-  #### note: must the path for model in dives same the path in code 
+  #### note: must the path for model in divce same the path in code 
   #### ex:
+  #### in code
 ![image](https://github.com/user-attachments/assets/560aa2fa-35a3-4544-b25b-b4c30d80ec8d)
+  #### in divce
 ![image](https://github.com/user-attachments/assets/247f57b2-bb36-4003-b667-7e90d6fbed1c)
 
 
