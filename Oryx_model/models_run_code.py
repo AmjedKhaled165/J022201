@@ -3,22 +3,22 @@ from ultralytics import YOLO
 import time
 import cv2
 
-phtot_for_space_fall_stand = "J022201\Oryx_model\phtot for space fall stand"
+phtot_for_space_an_offer_stand = "J022201\Oryx_model\phtot for space an offer stand"
 photo_for_space_with_stand = "J022201\Oryx_model\photo for space with stand"
 photo_for_product_and_space ="J022201\Oryx_model\photo for product and space"
 
-if not os.path.exists(phtot_for_space_fall_stand):
-    os.makedirs(phtot_for_space_fall_stand)
+if not os.path.exists(phtot_for_space_an_offer_stand):
+    os.makedirs(phtot_for_space_an_offer_stand)
 if not os.path.exists(photo_for_space_with_stand):
     os.makedirs(photo_for_space_with_stand)
 if not os.path.exists(photo_for_product_and_space):
     os.makedirs(photo_for_product_and_space)
 
-for filename in os.listdir(phtot_for_space_fall_stand):
-    file_path = os.path.join(phtot_for_space_fall_stand, filename)
+for filename in os.listdir(phtot_for_space_an_offer_stand):
+    file_path = os.path.join(phtot_for_space_an_offer_stand, filename)
     if os.path.isfile(file_path):
         os.remove(file_path)
-        print(f"Deleted {filename} from 'phtot for space fall stand' folder")
+        print(f"Deleted {filename} from 'phtot for space an offer stand' folder")
 
 for filename in os.listdir(photo_for_space_with_stand):
     file_path = os.path.join(photo_for_space_with_stand, filename)
@@ -55,9 +55,9 @@ while True:
 
             cropped_image = frame[y1:y2, :]
             timestamp = int(time.time())
-            test_image_path = os.path.join(phtot_for_space_fall_stand, f"{class_name}_{timestamp}.jpg")
+            test_image_path = os.path.join(phtot_for_space_an_offer_stand, f"{class_name}_{timestamp}.jpg")
             cv2.imwrite(test_image_path, cropped_image) 
-            print(f"phtot for space fall stand image saved: {test_image_path}")
+            print(f"phtot for space an offer stand image saved: {test_image_path}")
 
             resized_image = cv2.resize(cropped_image, (224, 224)) 
             name_image_path = os.path.join(photo_for_space_with_stand, f"{class_name}_{timestamp}.jpg")
