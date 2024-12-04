@@ -1,2 +1,2 @@
-ultralytics
-opencv-python
+ultralytics==8.2.4
+opencv-python==4.9.0
