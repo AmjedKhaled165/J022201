@@ -3,9 +3,9 @@ from ultralytics import YOLO
 import time
 import cv2
 
-output_images_path = "test"
-name_folder_path = "name"
-final_folder_path = "final"
+output_images_path = "J022201\Oryx_model\phtot for space fall stand"
+name_folder_path = "J022201\Oryx_model\photo for space with stand"
+final_folder_path = "J022201\Oryx_model\photo for product and space"
 
 if not os.path.exists(output_images_path):
     os.makedirs(output_images_path)
