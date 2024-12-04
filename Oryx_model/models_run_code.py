@@ -3,9 +3,9 @@ from ultralytics import YOLO
 import time
 import cv2
 
-phtot_for_space_an_offer_stand = "J022201\Oryx_model\phtot for space an offer stand"
-photo_for_space_with_stand = "J022201\Oryx_model\photo for space with stand"
-photo_for_product_and_space ="J022201\Oryx_model\photo for product and space"
+phtot_for_space_an_offer_stand = "J022201\Oryx_model\Phtot\phtot for space an offer stand"
+photo_for_space_with_stand = "J022201\Oryx_model\Phtot\photo for space with stand"
+photo_for_product_and_space ="J022201\Oryx_model\Phtot\photo for product and space"
 
 if not os.path.exists(phtot_for_space_an_offer_stand):
     os.makedirs(phtot_for_space_an_offer_stand)
