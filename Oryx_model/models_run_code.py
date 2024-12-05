@@ -18,7 +18,7 @@ for directory in directories:
     os.makedirs(directory)
 
 Oryx_01_empty_space_model = YOLO("J022201/Oryx_model/Oryx_01_empty_space_model.pt")
-Oryx_01_product_model = YOLO("J022201/Oryx_model/Oryx_01_product_model.pt")
+Oryx_01_product_model = YOLO("J022201/Oryx_model/Oryx_01_product_model_part1.pt")
 
 cap = cv2.VideoCapture(0)
 while True:
