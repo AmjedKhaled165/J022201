@@ -4,23 +4,23 @@ import cv2
 import time
 import shutil
 
-photo_for_space_with_stand = "J022201/Oryx_model/photo/photo_for_space_with_stand"
-photo_for_space_an_offer_stand = "J022201/Oryx_model/photo/photo_for_space_an_offer_stand"
-photo_for_product_and_space = "J022201/Oryx_model/photo/photo_for_product_and_space"
-final_folder = "J022201/Oryx_model/photo/final"
-final_product_folder = "J022201/Oryx_model/photo/final_product"  
+space_with_stand = "J022201/Oryx_model/photo/1space_with_stand"
+space_an_offer_stand = "J022201/Oryx_model/photo/2space_an_offer_stand"
+product_and_space = "J022201/Oryx_model/photo/3product_and_space"
+Space_with_product_full = "J022201/Oryx_model/photo/4Space_with_product_full"  
+Can_put_Prodect_of_space = "J022201/Oryx_model/photo/5Can_put_Prodect_of_space"
 
-directories = [photo_for_space_with_stand, photo_for_space_an_offer_stand, photo_for_product_and_space, final_folder, final_product_folder]  # إضافة فولدر final_product إلى القائمة
+directories = [space_with_stand, space_an_offer_stand, product_and_space, Can_put_Prodect_of_space, Space_with_product_full]  
 
 for directory in directories:
     if os.path.exists(directory):
         shutil.rmtree(directory)
     os.makedirs(directory)
 
-Oryx_01_empty_space_model = YOLO("J022201/Oryx_model/Oryx_01_empty_space_model.pt")
-Oryx_01_product_model = YOLO("J022201/Oryx_model/Oryx_01_product_model_part1.pt")
+Oryx_01_empty_space_model = YOLO(r"C:\Users\KoKo\Downloads\best (4).pt")
+Oryx_01_product_model = YOLO(r"C:\Users\KoKo\Downloads\Oryx_01_product_model_part1.pt")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(r"C:\Users\KoKo\Downloads\AnyUkit\video\Worker lauded for inviting teen with autism to help him stock supermarket.mp4")
 while True:
     ret, frame = cap.read()
 
@@ -33,7 +33,7 @@ while True:
             cv2.putText(frame, class_name, (x1, y1 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
             
             timestamp = int(time.time())
-            image_path = os.path.join(photo_for_space_with_stand, f"{class_name}_{timestamp}.jpg")
+            image_path = os.path.join(space_with_stand, f"{class_name}_{timestamp}.jpg")
             cv2.imwrite(image_path, frame)
 
     cv2.imshow("Oryx", frame)
@@ -43,9 +43,13 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
-for filename in os.listdir(photo_for_space_with_stand):
-    file_path = os.path.join(photo_for_space_with_stand, filename)
+for filename in os.listdir(space_with_stand):
+    file_path = os.path.join(space_with_stand, filename)
+    if os.path.isfile(file_path):
+        if filename.startswith("not Space"):
+            os.remove(file_path)
+for filename in os.listdir(space_with_stand):
+    file_path = os.path.join(space_with_stand, filename)
     if os.path.isfile(file_path):
         frame = cv2.imread(file_path)
         if frame is None:
@@ -59,11 +63,13 @@ for filename in os.listdir(photo_for_space_with_stand):
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
                 cv2.putText(frame, class_name, (x1, y1 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
-            final_product_path = os.path.join(final_product_folder, filename)
+            final_product_path = os.path.join(Space_with_product_full, filename)
             cv2.imwrite(final_product_path, frame)
 
-for filename in os.listdir(photo_for_space_with_stand):
-    file_path = os.path.join(photo_for_space_with_stand, filename)
+
+
+for filename in os.listdir(space_with_stand):
+    file_path = os.path.join(space_with_stand, filename)
     if os.path.isfile(file_path):
         frame = cv2.imread(file_path)
         if frame is None:
@@ -73,12 +79,12 @@ for filename in os.listdir(photo_for_space_with_stand):
         if len(results_space[0].boxes) > 0:
             for box in results_space[0].boxes:
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
-                resized_frame = frame[y1-50:y2-50, :]
-                resized_path = os.path.join(photo_for_space_an_offer_stand, filename)
+                resized_frame = frame[y1-25:y2+25, :]
+                resized_path = os.path.join(space_an_offer_stand, filename)
                 cv2.imwrite(resized_path, resized_frame)
 
-for filename in os.listdir(photo_for_space_an_offer_stand):
-    file_path = os.path.join(photo_for_space_an_offer_stand, filename)
+for filename in os.listdir(space_an_offer_stand):
+    file_path = os.path.join(space_an_offer_stand, filename)
     if os.path.isfile(file_path):
         frame = cv2.imread(file_path)
         if frame is None:
@@ -92,11 +98,11 @@ for filename in os.listdir(photo_for_space_an_offer_stand):
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
                 cv2.putText(frame, class_name, (x1, y1 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
-            product_path = os.path.join(photo_for_product_and_space, filename)
+            product_path = os.path.join(product_and_space, filename)
             cv2.imwrite(product_path, frame)
 
-for filename in os.listdir(photo_for_product_and_space):
-    file_path = os.path.join(photo_for_product_and_space, filename)
+for filename in os.listdir(product_and_space):
+    file_path = os.path.join(product_and_space, filename)
     if os.path.isfile(file_path):
         frame = cv2.imread(file_path)
         if frame is None:
@@ -115,5 +121,5 @@ for filename in os.listdir(photo_for_product_and_space):
                     product_width = product_x2 - product_x1 
 
                     if product_width < space_width:
-                        final_path = os.path.join(final_folder, filename)
+                        final_path = os.path.join(Can_put_Prodect_of_space, filename)
                         cv2.imwrite(final_path, frame)
