@@ -17,10 +17,10 @@ for directory in directories:
         shutil.rmtree(directory)
     os.makedirs(directory)
 
-Oryx_01_empty_space_model = YOLO(r"C:\Users\KoKo\Downloads\best (4).pt")
-Oryx_01_product_model = YOLO(r"C:\Users\KoKo\Downloads\Oryx_01_product_model_part1.pt")
+Oryx_01_empty_space_model = YOLO("J022201/Oryx_model/Oryx_Space_Final.pt")
+Oryx_01_product_model = YOLO("J022201/Oryx_model/Oryx_Product_Final.pt")
 
-cap = cv2.VideoCapture(r"C:\Users\KoKo\Downloads\AnyUkit\video\Worker lauded for inviting teen with autism to help him stock supermarket.mp4")
+cap = cv2.VideoCapture("J022201/Oryx_model/Shelf_Space_Test")
 while True:
     ret, frame = cap.read()
 
