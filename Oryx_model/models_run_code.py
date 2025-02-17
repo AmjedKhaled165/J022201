@@ -4,39 +4,61 @@ import cv2
 import time
 import shutil
 
-space_with_stand = "J022201/Oryx_model/photo/1space_with_stand"
-space_an_offer_stand = "J022201/Oryx_model/photo/2space_an_offer_stand"
-product_and_space = "J022201/Oryx_model/photo/3product_and_space"
-Space_with_product_full = "J022201/Oryx_model/photo/4Space_with_product_full"  
-Can_put_Prodect_of_space = "J022201/Oryx_model/photo/5Can_put_Prodect_of_space"
+space_with_stand = "Oryx_model/photo/1space_with_stand"
+space_an_offer_stand = "Oryx_model/photo/2space_an_offer_stand"
+product_and_space = "Oryx_model/photo/3product_and_space"
+Space_with_product_full = "Oryx_model/photo/4Space_with_product_full"  
+Can_put_Prodect_of_space = "Oryx_model/photo/5Can_put_Prodect_of_space"
 
-directories = [space_with_stand, space_an_offer_stand, product_and_space, Can_put_Prodect_of_space, Space_with_product_full]  
+directories = [space_with_stand, space_an_offer_stand, product_and_space, Can_put_Prodect_of_space, Space_with_product_full]
 
 for directory in directories:
     if os.path.exists(directory):
         shutil.rmtree(directory)
     os.makedirs(directory)
 
-Oryx_01_empty_space_model = YOLO("J022201/Oryx_model/Oryx_Space_Final.pt")
-Oryx_01_product_model = YOLO("J022201/Oryx_model/Oryx_Product_Final.pt")
+Oryx_01_empty_space_model = YOLO("Oryx_model/Oryx_Space_Final.pt")
+Oryx_01_product_model = YOLO("Oryx_model/Oryx_Product_Final.pt")
 
-cap = cv2.VideoCapture("J022201/Oryx_model/Shelf_Space_Test")
+cap = cv2.VideoCapture(0)
+
+start_time = time.time()
+camera_open_time = 0
+camera_opened = False
+prev_frame_time = time.time()
+
 while True:
     ret, frame = cap.read()
-
+    if not ret:
+        break
+    
+    if not camera_opened:
+        camera_open_time = time.time() - start_time
+        camera_opened = True
+    
+    frame_start_time = time.time()
+    
     results_space = Oryx_01_empty_space_model(frame)
+    
+    frame_processing_time = time.time() - frame_start_time
+    
+    fps = 1 / frame_processing_time
+    
     if len(results_space[0].boxes) > 0:
         for box in results_space[0].boxes:
-            if box.conf[0] >= 0.6: 
+            if box.conf[0] >= 0.6:
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
                 class_name = results_space[0].names[int(box.cls[0])]
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
                 cv2.putText(frame, class_name, (x1, y1 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-            
                 timestamp = int(time.time())
                 image_path = os.path.join(space_with_stand, f"{class_name}_{timestamp}.jpg")
                 cv2.imwrite(image_path, frame)
-
+    
+    if camera_opened:
+        cv2.putText(frame, f"Time to open: {camera_open_time:.2f}s", (7, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        cv2.putText(frame, f"FPS: {fps:.2f} ", (7, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+    
     cv2.imshow("Oryx", frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -44,6 +66,7 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 for filename in os.listdir(space_with_stand):
     file_path = os.path.join(space_with_stand, filename)
     if os.path.isfile(file_path):

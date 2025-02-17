@@ -76,7 +76,7 @@ def visualize_wave(audio_queue: queue.Queue, wave_surface):
         clock.tick(fps)
 
 def chat_bot(audio_queue: queue.Queue):
-    knowledge_base = load_knowledge_base('index.json')
+    knowledge_base = load_knowledge_base('Oryx_eyse_chatbot\index.json')
     first_time = True
 
     while True:
@@ -128,12 +128,12 @@ def get_answer_for_question(question: str, knowledge_base: dict):
             return q["answer"]
 
 def eye_movement(screen, eye_surface, cap, known_encodings, labels):
-    pupil_happy_left = pygame.image.load(r"Photo\pupil_happy_left.png")
-    pupil_happy_right = pygame.image.load(r"Photo\pupil_happy_right.png")
-    pupil_angry_left = pygame.image.load(r"Photo\pupil_angry_left.png")
-    pupil_angry_right = pygame.image.load(r"Photo\pupil_angry_right.png")
-    pupil_normal_left = pygame.image.load(r"Photo\pupil_normal_left.png")
-    pupil_normal_right = pygame.image.load(r"Photo\pupil_normal_right.png")
+    pupil_happy_left = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_happy_left.png")
+    pupil_happy_right = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_happy_right.png")
+    pupil_angry_left = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_angry_left.png")
+    pupil_angry_right = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_angry_right.png")
+    pupil_normal_left = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_normal_left.png")
+    pupil_normal_right = pygame.image.load(r"Oryx_eyse_chatbot\Photo\pupil_normal_right.png")
 
     pupil_happy_left = pygame.transform.scale(pupil_happy_left, (300, 300))
     pupil_happy_right = pygame.transform.scale(pupil_happy_right, (300, 300))
@@ -142,9 +142,9 @@ def eye_movement(screen, eye_surface, cap, known_encodings, labels):
     pupil_normal_left = pygame.transform.scale(pupil_normal_left, (300, 300))
     pupil_normal_right = pygame.transform.scale(pupil_normal_right, (300, 300))
 
-    eye_background = pygame.image.load(r"Photo\eye_background.png")
+    eye_background = pygame.image.load(r"Oryx_eyse_chatbot\Photo\eye_background.png")
     eye_background = pygame.transform.scale(eye_background, (600, 600))
-    background_image = pygame.image.load(r"Photo\background_image.png")
+    background_image = pygame.image.load(r"Oryx_eyse_chatbot\Photo\background_image.png")
     background_image = pygame.transform.scale(background_image, (1920, 1080))
 
     left_eye_center = (960, 220)  
@@ -197,7 +197,7 @@ def eye_movement(screen, eye_surface, cap, known_encodings, labels):
         else:
             target_x, target_y = 1020, 540
 
-        dx = target_x - 1300
+        dx = target_x - 1250
         dy = target_y - 500
 
         eye_surface.blit(background_image, (0, 0))
@@ -219,16 +219,16 @@ def main():
     screen = pygame.display.set_mode((1920, 1080))
     pygame.display.set_caption("Combined Window")
 
-    wave_surface = pygame.Surface((1920, 300))  
+    wave_surface = pygame.Surface((1920, 50))  
     eye_surface = pygame.Surface((1920, 1080))
 
     cap = cv2.VideoCapture(0)
     known_encodings = []
     labels = []
 
-    happy_image1 = face_recognition.load_image_file(r"Photo\amjed.jpg")
-    happy_image2 = face_recognition.load_image_file(r"Photo\ziad.jpg")
-    angry_image2 = face_recognition.load_image_file(r"Photo\boda.jpg")
+    happy_image1 = face_recognition.load_image_file(r"Oryx_eyse_chatbot\Photo\amjed.jpg")
+    happy_image2 = face_recognition.load_image_file(r"Oryx_eyse_chatbot\Photo\ziad.jpg")
+    angry_image2 = face_recognition.load_image_file(r"Oryx_eyse_chatbot\Photo\boda.jpg")
 
     happy_encoding1 = face_recognition.face_encodings(happy_image1)[0]
     happy_encoding2 = face_recognition.face_encodings(happy_image2)[0]
@@ -258,7 +258,7 @@ def main():
 
         screen.fill((0, 0, 0))
         screen.blit(eye_surface, (0, 0))  
-        screen.blit(wave_surface, (0, 780))  
+        screen.blit(wave_surface, (0, 840))  
         pygame.display.flip()
 
     pygame.quit()
