@@ -7,7 +7,6 @@ from ultralytics import YOLO
 import tkinter as tk
 import serial
 
-# المسارات
 space_with_stand = "Oryx_model/photo/1space_with_stand"
 space_an_offer_stand = "Oryx_model/photo/2space_an_offer_stand"
 product_and_space = "Oryx_model/photo/3product_and_space"
@@ -15,24 +14,20 @@ Space_with_product_full = "Oryx_model/photo/4Space_with_product_full"
 Can_put_Prodect_of_space = "Oryx_model/photo/5Can_put_Prodect_of_space"
 directories = [space_with_stand, space_an_offer_stand, product_and_space, Can_put_Prodect_of_space, Space_with_product_full]
 
-# فتح الاتصال مع Arduino
 try:
     ser = serial.Serial('COM6', 9600)
 except:
     ser = None
     print("Serial port not found.")
 
-# تحميل النماذج
 Oryx_01_empty_space_model = YOLO("Oryx_model/Oryx_Space_Final.pt")
 Oryx_01_product_model = YOLO("Oryx_model/Oryx_Product_Final.pt")
 
-# التحكم في التشغيل
 processing_active = False
 
 def process_video():
     global processing_active
 
-    # إعادة إنشاء المجلدات
     for directory in directories:
         if os.path.exists(directory):
             shutil.rmtree(directory)
@@ -80,7 +75,6 @@ def process_video():
     cap.release()
     cv2.destroyAllWindows()
 
-    # المعالجة بعد الفيديو (بدون تغيير في المنطق الأصلي)
     for filename in os.listdir(space_with_stand):
         file_path = os.path.join(space_with_stand, filename)
         if os.path.isfile(file_path):
@@ -140,13 +134,11 @@ def process_video():
                     if p_width < s_width:
                         cv2.imwrite(os.path.join(Can_put_Prodect_of_space, filename), frame)
 
-# واجهة المستخدم
 root = tk.Tk()
 root.title("ORYX - Control Panel")
 root.geometry("500x500")
 root.configure(bg="#1e1e1e")
 
-# تحريك اللوجو
 color_index = 0
 def animate_logo():
     global color_index
@@ -155,7 +147,6 @@ def animate_logo():
     color_index = (color_index + 1) % len(colors)
     root.after(600, animate_logo)
 
-# إرسال بيانات للـ Arduino
 def send_serial(value):
     if ser and ser.is_open:
         ser.write(value.encode())
@@ -176,7 +167,6 @@ def on_command(command, button, bg, fg, serial_value):
     elif command == "STOP":
         processing_active = False
 
-# Hover effect
 def on_enter(e): e.widget.config(bg="#ffc107", fg="#000")
 def on_leave(e):
     if "FORWARD" in e.widget.cget("text"):
@@ -186,7 +176,6 @@ def on_leave(e):
     elif "STOP" in e.widget.cget("text"):
         e.widget.config(bg="#e53935", fg="white")
 
-# واجهة ORYX
 logo_label = tk.Label(root, text="ORYX", font=("Helvetica", 36, "bold"), fg="#ffc107", bg="#1e1e1e")
 logo_label.pack(pady=40)
 animate_logo()
