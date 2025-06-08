@@ -41,18 +41,26 @@
 ![image](https://github.com/user-attachments/assets/9500cd7a-ca9b-4194-a02d-21153e8ec537)
 ![image](https://github.com/user-attachments/assets/03646dcc-61b3-4f82-81c9-f8cdfaf041b9)
 
-# How Run Oryx_01_model.pt
+# How Run Oryx_model
 ### Frist Downloads Libraries
     
     pip install -r requirements.txt
 
-### Second open app.py and run code
+### Second open models_run_code.py and run code
   #### note: must the path for model in divce same the path in code 
   #### ex:
   #### in code
 ![image](https://github.com/user-attachments/assets/560aa2fa-35a3-4544-b25b-b4c30d80ec8d)
   #### in divce
 ![image](https://github.com/user-attachments/assets/247f57b2-bb36-4003-b667-7e90d6fbed1c)
+
+# How Run Oryx_eyse_chatbot
+### Frist satup dlib
+  #### Go to cmd. The cmd path must be the same path where dlib-20.0.0-cp310-cp310-win_amd64 was downloaded. 
+  #### Enter this code :pip install dlib-20.0.0-cp310-cp310-win_amd64.whl
+  ![image](https://github.com/user-attachments/assets/f4800812-4a9a-4c98-a9ed-dd408d0a9ae0)
+  
+  #### Note: Python version must be 9.10
 
 
   
