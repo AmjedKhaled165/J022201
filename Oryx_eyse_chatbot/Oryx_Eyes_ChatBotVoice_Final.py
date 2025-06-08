@@ -81,7 +81,7 @@ def chat_bot(audio_queue: queue.Queue):
 
     while True:
         recognizer = sr.Recognizer()
-        with sr.Microphone() as source:
+        with sr.Microphone(device_index=1) as source:
             if first_time:
                 print("I'm listening, please speak now.")
                 first_time = False
@@ -222,7 +222,7 @@ def main():
     wave_surface = pygame.Surface((1920, 50))  
     eye_surface = pygame.Surface((1920, 1080))
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     known_encodings = []
     labels = []
 
